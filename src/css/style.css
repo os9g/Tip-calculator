@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+:root {
+  --primariy-color: #c5e4e7;
+  --secondary-color: #00474b;
+  --light-color: #f3f8fb;
+  --font-color: #35c3b2;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Space Mono", monospace;
+  background-color: var(--primariy-color);
+}
+img {
+  width: 100%;
+}
+button {
+  cursor: pointer;
+}
+
+.logo {
+  width: 100px;
+  margin: 100px auto;
+}
+
+.tip {
+  margin: 10px 20px;
+}
+
+.tip input {
+  font-size: 20px;
+  font-family: "Space Mono", monospace;
+  height: 55px;
+  background-color: var(--light-color);
+  border: none;
+  width: 100%;
+}
+.tip input:focus {
+  outline: none;
+}
+.bill {
+  margin: 30px 0;
+}
+.tip h3 {
+  margin: 10px 0;
+  font-weight: 500;
+}
+.tip img {
+  width: 10px;
+  margin: 0 15px;
+}
+.input-icon {
+  height: 30px;
+  background-color: var(--light-color);
+}
+.calculator .grid {
+  gap: 10px;
+}
+.calculator .card {
+  margin: 0 80px;
+  margin-bottom: 80px;
+}
+
+.tip-selection {
+  margin: 30px 0;
+}
+.tip-selection .grid {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin: 20px 0;
+}
+.tip-selection .grid button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: "Space Mono", monospace;
+  border: none;
+  transition: 0.5s;
+}
+.tip-selection .grid button:hover {
+  background-color: var(--font-color);
+}
+.tip-selection .grid button:target {
+  background-color: var(--font-color);
+}
+.tip-selection .grid input {
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Space Mono", monospace;
+  text-align: center;
+}
+
+.display {
+  height: 100%;
+}
+.display h1 {
+  color: var(--font-color);
+  font-size: 40px;
+}
+.display button {
+  font-size: 20px;
+  height: 40px;
+  width: 90%;
+  margin-top: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--font-color);
+}
+.display .flex {
+  justify-content: space-between;
+  height: unset;
+}
+.tital {
+  margin: 50px 20px;
+}
+.tital h3 {
+  color: #fff;
+}
+.tital p {
+  color: var(--primariy-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calculator .grid {
+    grid-template-columns: 1fr;
+  }
+  .calculator .card {
+    margin: 0 10px;
+  }
+  .tip-selection .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin: 20px 0;
+  }
+}
