@@ -80,12 +80,12 @@ button {
   font-size: 20px;
   font-family: "Space Mono", monospace;
   border: none;
-  transition: 0.5s;
+  transition: 0.5s ease-out;
 }
 .tip-selection .grid button:hover {
   background-color: var(--font-color);
 }
-.tip-selection .grid button:target {
+.tip-selection .grid button:focus {
   background-color: var(--font-color);
 }
 .tip-selection .grid input {
@@ -96,7 +96,12 @@ button {
   font-family: "Space Mono", monospace;
   text-align: center;
 }
-
+.tip-selection input {
+  transition: 0.1s ease-out;
+}
+.tip-selection input:focus {
+  border: 3px #35c3b2 solid;
+}
 .display {
   height: 100%;
 }
@@ -127,6 +132,9 @@ button {
 }
 .tital p {
   color: var(--primariy-color);
+}
+.people .bill p {
+  color: red;
 }
 
 /* Responsive */
