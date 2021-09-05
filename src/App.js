@@ -1,7 +1,6 @@
 import React from 'react'
 import './css/style.css'
 import './css/utililties.css'
-import xtype from 'xtypejs'
 import logo from './images/logo.svg'
 import dollar from './images/icon-dollar.svg'
 import person from './images/icon-person.svg'
@@ -13,8 +12,11 @@ class App extends React.Component {
     super(props)
     this.state = {
       tip: 0,
-      bill: '',
+      bill: false,
+      custom_check: false,
       people: 1,
+      worning: '',
+      custom_tip: null,
       custom_tital: 'Custom',
       filed_border: '#fff',
       bg5: '#00474b',
@@ -25,23 +27,25 @@ class App extends React.Component {
     }
   }
   TipAmount = () => {
-    tip_amount = this.state.bill * (this.state.tip / this.state.people)
-    tip_amount = (Math.round(tip_amount * 100) / 100).toFixed(2)
-    tip_amount = Number(tip_amount)
-    if (tip_amount === Infinity || isNaN(tip_amount)) {
-      tip_amount = 0
-      worning = 'Please enter the number of people'
+    if (this.state.custom_check === true) {
+      return this.state.custom_tip
+    } else {
+      tip_amount = this.state.bill * (this.state.tip / this.state.people)
+      tip_amount = (Math.round(tip_amount * 100) / 100).toFixed(2)
+      tip_amount = Number(tip_amount)
+      if (tip_amount === Infinity || isNaN(tip_amount)) {
+        tip_amount = 0
+      }
+      return tip_amount
     }
-    return tip_amount
   }
+
   TotalAmount = () => {
-    total_amount = (this.state.bill + tip_amount) / this.state.people
+    total_amount = (this.state.bill + this.TipAmount()) / this.state.people
     total_amount = (Math.round(total_amount * 100) / 100).toFixed(2)
     total_amount = Number(total_amount)
-    console.log(total_amount)
     if (total_amount === Infinity || isNaN(total_amount)) {
       total_amount = 0
-      worning = 'Please enter the number of people'
     }
     return total_amount
   }
@@ -49,6 +53,12 @@ class App extends React.Component {
     window.location.reload()
   }
   render() {
+    console.log(this.state.custom_tip)
+    if (this.state.people === '') {
+      worning = 'Please enter the number of people'
+    } else {
+      worning = ''
+    }
     return (
       <div className="calculator container">
         <div className="logo">
@@ -81,6 +91,7 @@ class App extends React.Component {
                         tip: 0.05,
                         filed_border: '#fff',
                         custom_tital: 'Custom',
+                        custom_check: false,
                         bg5: '#35c3b2',
                         bg50: '#00474b',
                         bg10: '#00474b',
@@ -98,6 +109,7 @@ class App extends React.Component {
                         tip: 0.1,
                         custom_tital: 'Custom',
                         filed_border: '#fff',
+                        custom_check: false,
                         bg10: '#35c3b2',
                         bg5: '#00474b',
                         bg50: '#00474b',
@@ -115,6 +127,7 @@ class App extends React.Component {
                         tip: 0.15,
                         filed_border: '#fff',
                         custom_tital: 'Custom',
+                        custom_check: false,
                         bg15: '#35c3b2',
                         bg5: '#00474b',
                         bg10: '#00474b',
@@ -132,6 +145,7 @@ class App extends React.Component {
                         tip: 0.25,
                         filed_border: '#fff',
                         custom_tital: 'Custom',
+                        custom_check: false,
                         bg25: '#35c3b2',
                         bg5: '#00474b',
                         bg10: '#00474b',
@@ -149,6 +163,7 @@ class App extends React.Component {
                         tip: 0.5,
                         filed_border: '#fff',
                         custom_tital: 'Custom',
+                        custom_tip: false,
                         bg50: '#35c3b2',
                         bg5: '#00474b',
                         bg10: '#00474b',
@@ -164,11 +179,12 @@ class App extends React.Component {
                     style={{ border: `3px ${this.state.filed_border} solid` }}
                     placeholder={this.state.custom_tital}
                     onChange={(e) => {
-                      this.setState({ tip: Number(e.target.value) })
+                      this.setState({ custom_tip: Number(e.target.value) })
                     }}
                     onSelect={() => {
                       this.setState({
-                        custom_tital: '',
+                        custom_check: true,
+                        custom_tital: false,
                         filed_border: '#35c3b2',
                         bg50: '#00474b',
                         bg10: '#00474b',
@@ -183,14 +199,14 @@ class App extends React.Component {
                 <div className="people">
                   <div className="bill">
                     <h3 for="">Number of People</h3>
-                    <p></p>
+                    <p>{worning}</p>
                     <div className="input-icon flex">
                       <img src={person} alt="" />
                       <input
                         type="number"
                         value={this.state.people}
                         onChange={(e) => {
-                          this.setState({ people: Number(e.target.value) })
+                          this.setState({ people: e.target.value })
                         }}
                       />
                     </div>
